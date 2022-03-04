@@ -1,0 +1,38 @@
+.container-sm{
+    height:48.6vw;
+    width:370px;
+    /* border:1px solid gray; */
+    border-radius:10px;
+    box-shadow: 5px 10px 20px rgb(248, 153, 169);
+    /* margin:7000px 300px 700x 300px */
+}
+
+.text-primary{
+cursor:pointer;
+}
+
+#btnlog{
+    margin-left:600px;
+}
+
+#btnsign{ 
+    margin-right:20px;
+}
+
+.alerterr{
+    color:red;
+    font-size:12px;
+ /* margin-left:-230px; */
+ display: flex;
+ justify-content: start;
+}
+
+.form-label{
+    margin-left:-260px;
+    color:rgb(61, 45, 206);
+}
+
+/* .form11-label{
+    margin-left:-290px;  
+    color:rgb(61, 45, 206);
+} */

@@ -1,0 +1,110 @@
+{
+  "Register": [
+    {
+      "Name": "Webiwork",
+      "Email": "xyz@webiwork.com",
+      "Password": "Web@123",
+      "id": 1
+    },
+    {
+      "Name": "anjay",
+      "Email": "anjay@123.com",
+      "Password": "123454321",
+      "id": 2
+    },
+    {
+      "Name": "admin",
+      "Email": "admin@1.com",
+      "Password": "admin",
+      "id": 3
+    },
+    {
+      "Name": "yash",
+      "Email": "xyz@yash.com",
+      "Password": "yash",
+      "id": 4
+    },
+    {
+      "Name": "Sam",
+      "Email": "sam@123.com",
+      "Password": "sam",
+      "id": 5
+    },
+    {
+      "Name": "yash",
+      "Email": "yash@123.com",
+      "Password": "yash",
+      "id": 6
+    },
+    {
+      "Name": "Admin",
+      "Email": "admin@123.com",
+      "Password": "123454321",
+      "id": 7
+    },
+    {
+      "Name": "AAAdad",
+      "Email": "sdf@123.com",
+      "Password": "Shailen@123",
+      "id": 8
+    },
+    {
+      "Name": "Anuj",
+      "Email": "anuj@123.com",
+      "Password": "Anuj@123",
+      "id": 9
+    }
+  ],
+  "login": [
+    {
+      "Email": "webiwork@1233.com",
+      "Password": "webiwork",
+      "id": 1
+    },
+    {
+      "Email": "xyz@yash.com",
+      "Password": "yash",
+      "id": 2
+    },
+    {
+      "Email": "xyz@yash.com",
+      "Password": "yash",
+      "id": 3
+    },
+    {
+      "Email": "xyz@yash.com",
+      "Password": "yash",
+      "id": 4
+    }
+  ],
+  "Employee": [
+    {
+      "name": "Wasim Farooq",
+      "mobile": "9876543210",
+      "email": "wasim@123.com",
+      "salary": "190000",
+      "id": 1
+    },
+    {
+      "name": "Angelo Methew",
+      "mobile": "9091232848",
+      "email": "angelo@123.com",
+      "salary": "35500",
+      "id": 2
+    },
+    {
+      "name": "Andre Russell",
+      "mobile": "9876543210",
+      "email": "and@russ.com",
+      "salary": "190000",
+      "id": 3
+    },
+    {
+      "name": "aron finch",
+      "mobile": "9878113567",
+      "email": "aron@123.com",
+      "salary": "90000",
+      "id": 4
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+.red{
+    color:red;
+    text-decoration:none;
+}
+
+#link{
+    color:rgb(228, 61, 20);
+    text-decoration:none;
+}
+
+h1{
+    text-align:center;
+    color:gray;
+}
+
+.center{
+    margin:auto;
+}
+
+.container{
+    height:45vw;
+    width:370px;
+    /* border:1px solid gray; */
+    border-radius:10px;
+    box-shadow: 5px 10px 20px rgb(248, 153, 169);
+     margin:37px 300px 21px 300px;
+}
+
+/* .form22-label{
+    margin-left:-295px;
+    color:rgb(61, 45, 206);
+} */
+/* .alerterr11{
+    margin-left:-220px;
+    font-size:10px;
+    color:red;
+} */
+

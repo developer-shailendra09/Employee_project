@@ -1,0 +1,190 @@
+import React, { useEffect, useState } from "react";
+import { Router, Route } from "react-router-dom";
+import Login from "./Login";
+import { useNavigate } from "react-router";
+import { exact, path, component } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './signup.css'
+
+function Signup() {
+  
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [nameErr, setNameErr] = useState("");
+    const [emailErr, setEmailErr] = useState(false);
+    const [passwordErr, setPasswordErr] = useState(false);
+    const [data, setData] = useState();
+    var navigate = useNavigate();
+  
+    console.log("name", name)
+    console.log("nameErr",nameErr)
+    console.log("emailErr",emailErr)
+    console.log("passwordErr",passwordErr)
+    function handleName(e) {
+      let item = e.target.value;
+      setName(item);
+      setNameErr("");
+    }
+  
+    function handleEmail(e) {
+      let item = e.target.value;
+      setEmail(item);
+      setEmailErr("");
+    }
+  
+    function handlePassword(e) {
+      let item = e.target.value;
+      setPassword(item);
+      setPasswordErr("");
+    }
+  
+    function dataStore(e) {
+     e.preventDefault();
+      let checkName = "^[A-Za-z]{8-15}$";
+      let checkEmail = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
+      let checkPassword= "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+      
+   if(name=== '' && checkName){
+    setNameErr("** Name is required.")
+    }
+     else if(email=== '' && checkEmail){
+      setEmailErr("**  Email is required.")
+    }
+       else if(password=== '' && checkPassword ){
+        setPasswordErr("**  Password is required.")
+    }
+    else{
+      e.preventDefault();
+      const payload = {
+        Name: name,
+        Email: email,
+        Password: password,
+      };
+  
+      console.log("payload", payload);
+      var users = data.find((res) => {
+        console.log("rrrrrrrrrrrr", res);
+        if (res && res.Email !== payload.Email) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      let findData = data.findIndex((res) => res.Email == payload.Email);
+  
+      console.log("user--", findData);
+      if (findData == -1) {
+        toast.success("Successfully Registered ",{
+          position: "top-center"
+        });
+        setTimeout(() => {
+           navigate("/Login");
+         }, 2000);
+      
+  
+        fetch("http://localhost:3000/Register", {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }).then((res) => console.log("res", res));
+      } else {
+        toast.warn("Already Registered",{
+          position: "top-center"
+        });
+        setTimeout(() => {
+          navigate("/Login");
+        }, 1000)
+      }
+    }
+    }
+    useEffect(() => {
+      fetch("http://localhost:3000/Register")
+        .then((response) => response.json())
+        .then((data) => setData(data));
+    }, []);
+  
+    function routePage(e){
+      navigate('/Login')
+    }
+  
+    return (
+      <>
+       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+       <a className="navbar-brand" style={{ color:"#34eb74",marginLeft:"33px",cursor:"pointer"}} onClick={() => {navigate('/')}}>Webiwork</a>          
+       <button className="btn btn-outline-light" id="btnlog" onClick={() => navigate('/Login')}>Login</button>&nbsp;&nbsp;
+                 <button className="btn btn-light" id="btnsign">Signup</button>
+      </nav>
+      
+      <div style={{backgroundColor:"#dbd4c8"}}>
+      <br/><br/>
+       <div className="container-sm bg-light"><br/>
+       <h4>Register</h4>
+          {/* <form className="needs-validation"   onSubmit={loginHandle}> */}
+          <form className="needs-validation" onSubmit={dataStore}>
+            <div className="mb-6 ">
+            <label className="form-label">Username</label>
+              <input
+                type="text"
+                name=""
+                className="form-control"
+                id="username"
+                placeholder="Enter Your Name"
+                onChange={handleName}
+                //value={name}
+              />
+              <span className="alerterr" >{nameErr}</span> 
+            </div>
+            <div className="mb-6">
+              
+              <label className="form-label" style={{marginLeft:"-290px"}}>Email</label>
+              <input
+                type="text"
+                className="form-control"
+                id="email"
+                placeholder="Enter Your Email"
+                onChange={handleEmail}
+                 //value={email}
+              />
+              <span className="alerterr">{emailErr}</span>
+            </div>
+
+            <div className="mb-6">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                name=""
+                className="form-control"
+                id="password"
+                placeholder="Enter Password"
+               // value={password}
+                onChange={handlePassword}/>
+              <span id="passwordError" className="required text-denger font-weight-bolder"></span>
+              <span className="alerterr" style={{marginLeft:"-205px"}}>{passwordErr}</span>
+            </div>
+           
+         
+            <button  className="row btn btn-primary" 
+            
+            
+            >Create Account</button>
+          
+            &nbsp; &nbsp; &nbsp;
+          </form>
+          <br />
+          <span style={{fontSize:"14px",color:"red"}}>
+            Already have an Account? &nbsp;&nbsp;&nbsp;
+            <a className="text-primary" onClick={routePage}>Login</a>
+          </span>
+        </div>
+        <br/>
+        </div>
+        <ToastContainer/>
+      </>
+    );
+  }
+  
+  export default Signup;

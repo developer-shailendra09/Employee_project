@@ -1,0 +1,178 @@
+import React, {useEffect, useState } from 'react';
+import {useNavigate} from 'react-router';
+import './login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+function Login()
+{
+    const [user,setUser]=useState("");
+    const [password,setPassword]=useState("");
+    const [userErr,setUserErr]=useState('');
+    const [passErr,setPassErr]=useState('');
+    const [data , setData] = useState([])
+    let navigate = useNavigate();  
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+
+    function handleUser(e) {
+      let item = e.target.value;
+      setUser(item);
+      setUserErr("");
+    }
+  
+    function handlePassword(e) {
+      let item = e.target.value;
+      setPassword(item);
+      setPassErr("");
+    }
+
+  //   function validate() {
+  //     if (!validEmail.test(user)) {
+  //       setUserErr('email is required');
+  //     }else if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.validEmail)  {
+  //       console.log('09-0');
+  //     }
+
+  //     if (!validPassword.test(password)) {
+  //       setPassErr('password is required');
+  //     }
+  //  };
+   
+   function loginHandle(e)
+        {
+          e.preventDefault();
+            
+        if(user=== '' ){
+          setUserErr("**Email is required")
+           }
+        else if(password===''){
+            setPassErr('** Password is required')
+             }
+    else{
+      e.preventDefault();
+      var payload = 
+      {
+      Email: user,
+      Password: password,
+      };
+
+     //  if (!user) {
+     //   setUserErr('Name is requied!')
+     // }
+     // if (!password) {
+     //   setPassErr('password is requied!')
+     // }
+
+
+      console.log("payload" , payload);
+      var users = data.find((res)=>
+      {
+        console.log("rrrrrrrrrrrr",res);
+        return  res.Email === payload.Email && res.Password===payload.Password
+      })
+      if(users){
+        localStorage.setItem('user', JSON.stringify(users))
+      
+      e.preventDefault();
+      const payload =
+     {
+      Email: user,
+      Password: password,
+     };
+     console.log("payload" , payload);
+     fetch('http://localhost:3000/Login', 
+     {
+     method: 'POST', // or 'PUT'
+     headers: {
+       'Content-Type': 'application/json',
+     },
+      body: JSON.stringify(payload),
+     })
+     toast.success("Successfully Login",{
+       position: "top-center"
+     });
+     setTimeout(() => {
+       navigate('/Homes')
+     }, 1000);
+    
+     console.log("navigate herre ",navigate);
+     }
+     else
+     {
+       toast.error("Invalid email or password",{
+         position: "top-center"
+     
+       });
+       //alert("No user found. Please Enter Valid credential")
+     }
+
+    }
+        }
+
+
+        useEffect(() => {
+        fetch('http://localhost:3000/Register')
+        .then(response => response.json())
+        .then(data => setData(data));
+          },[])
+
+    function routePage(){
+      navigate('/Signup')
+    }
+
+    console.log('user---',user);
+
+    return (
+        <>
+         <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+             <a className="navbar-brand" style={{ color:"#34eb74",marginLeft:"33px",cursor:"pointer"}} onClick={() => {navigate('/')}}>Webiwork</a>          
+                 <button className="btn btn-light" id="btnlog">Login</button> &nbsp;&nbsp;
+                 <button className="btn btn-outline-light" id="btnsign" onClick={() => navigate('/Signup')}>Signup</button>
+         </nav>
+         <div style={{backgroundColor:"#dbd4c8"}}>
+           <br/>
+                <div className="container bg-light">
+                <br/>
+                <h4>Login</h4>
+                <form onSubmit={loginHandle}>
+                        <div className="mb-6">
+                        <label className="form-label" style={{marginLeft:"-290px"}}>Email</label>
+                        <br/>
+                                <input type="text" className="form-control" id="email" placeholder="Enter Your Email"   onChange={handleUser} />
+                                {/* {userErr?<span className="alerterr"># &nbsp;&nbsp; {userErr}</span>:""} */}
+
+                                <span className="alerterr"> {userErr}</span>
+                                    <div id="emailHelp" className="form-text"></div>
+                        </div>
+                        <div className="mb-6">
+                        <label className="form-label">Password</label>
+                          <br/>
+                        <input type="password" className="form-control" placeholder="Password"   onChange={handlePassword} />
+                        
+                        {/* {passErr?<span className="alerterr"> #&nbsp;&nbsp;{passErr}</span>:""} */}
+
+                     <span className="alerterr" style={{marginLeft:"-205px"}}> {passErr}</span>
+                            
+                        </div> 
+                        <br/>
+                        <hr/>
+                        <div>
+                        <button type="submit" className="btn btn-primary btn-lg" //onClick={validate}
+                         >Submit</button>&nbsp; &nbsp;  &nbsp;
+                        <a className="text-primary" onClick={() => navigate('/Reset')}id="link">Forgot Password ?</a>
+                    </div>
+                    <br/>
+                    <span style={{fontSize:"14px", color:"red"}}>New to Webiwork? &nbsp;
+                            <a className="text-primary" onClick={routePage}>Create Account</a>
+                            </span>
+                </form>
+        </div><br/>
+        </div>
+        <ToastContainer/>
+</>
+
+    );
+  }
+  
+  export default Login;

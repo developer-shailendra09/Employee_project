@@ -1,0 +1,9 @@
+.myreset{
+    height:28vw;
+    width:370px;
+    /* border:1px solid gray; */
+    border-radius:10px;
+    box-shadow: 5px 10px 20px rgb(230, 176, 185);
+    margin:82px 300px 114px 300px;
+    
+}

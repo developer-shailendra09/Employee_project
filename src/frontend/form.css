@@ -1,0 +1,14 @@
+.form{
+    height:55vw;
+    width:500px;
+    /* border:1px solid gray; */
+    border-radius:10px;
+    box-shadow: 5px 10px 20px rgb(248, 153, 169);
+     margin-left:220px;
+} 
+
+label{
+    margin-left:-340px;
+    color:rgb(61, 45, 206);
+}
+
